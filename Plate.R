@@ -49,14 +49,17 @@ setValidity("Plate", function(object) {
 })
 
 concentration <- matrix(1:6, 2, 3)
-name <- matrix(c("dog", "cat", "mouse", "mouse", "dog", "cat"), 2, 3)
-
-plate <- new("Plate", layers = list(conc = concentration, name = name))
+animal <- matrix(c("dog", "cat", "mouse", "mouse", "dog", "cat"), 2, 3)
+ranking <- data.frame(col1 = c(1, 1), col2 = c(NA, 2), col3 = c(1, 2))
+plate <- new("Plate", layers = list(conc = concentration,
+                                    animal = animal,
+                                    rank = ranking))
 
 setGeneric("serve", function(x) standardGeneric("serve"))
 
 setMethod("serve", "Plate", function(x) {
   x@layers |>
+    lapply(as.matrix) |>
     lapply(as.vector) |>
     reduce(bind_cols) |>
     setNames(names(x@layers))
