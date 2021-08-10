@@ -1,4 +1,4 @@
-# plate
+# plate <img src='./plate.png' align="right" height="139" />
 
 # Planned Features
 
